@@ -6,6 +6,11 @@
 
 #define GROWTH_SIZE 50
 
+struct data allocate(struct data** ptr);
+struct data *reallocate(struct data** ptr);
+int deallocate(data* ptr);
+
+
 void main(){
 
     FILE *fptr = fopen("sunspot.dat", "r");
@@ -40,6 +45,10 @@ void main(){
     printf("min = %f", min(data_arr, curr_size));
     printf("max = %f", max(data_arr, curr_size));
 
+
+    return 0;
+}
+
     struct data allocate(struct data** ptr){
     ptr = malloc(curr_size*sizeof(struct data));
     return ptr;
@@ -55,5 +64,3 @@ void main(){
         free(ptr);
         return 0;
     }
-
-}
