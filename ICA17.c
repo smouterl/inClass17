@@ -8,8 +8,8 @@
 
 #define GROWTH_SIZE 50
 
-data *allocate(data* ptr, int curr_size);
-data *reallocate(data* ptr, int curr_size);
+data *allocate(data* ptr, int size);
+data *reallocate(data* ptr, int size);
 int deallocate(data* ptr);
 
 
@@ -21,6 +21,7 @@ int main(){
 
     data *data_arr;
     data_arr = allocate(data_arr, curr_size);
+    printf("this happen allocate\n");
 
     if (fptr == NULL) {
         printf("Error: Could not open file.\n");
@@ -34,8 +35,10 @@ int main(){
 
     do{
         fgets(user_input, 80, (fptr+index));
+        printf("this happen 1\n");
         strcpy(token1, strtok(user_input, "   "));
         strcpy(token2, strtok(NULL, "   "));
+        printf("this happen 2\n");
         if(index < curr_size){
             double *temp = getData(token1, token2);
             ((data_arr + index)->year) = *temp;
@@ -54,14 +57,14 @@ int main(){
     return 0;
 }
 
-    data *allocate(data* ptr, int curr_size){
-    ptr = malloc(curr_size*sizeof(data));
+    data *allocate(data* ptr, int size){
+    ptr = malloc(size*sizeof(data));
     return ptr;
     }
 
-    data *reallocate(data* ptr, int curr_size){
-    curr_size += GROWTH_SIZE;
-    ptr = realloc(ptr, curr_size*sizeof(data));
+    data *reallocate(data* ptr, int size){
+    size += GROWTH_SIZE;
+    ptr = realloc(ptr, size*sizeof(data));
     return ptr;
     }
 
