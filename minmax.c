@@ -19,6 +19,7 @@ float sunspot_min(const data records[], size_t count)
 float sunspot_max(const data records[], size_t count)
 {
     if (records == NULL || count == 0) {
+        return NAN;
 2    }
 
     double maximum = records[0].value;
