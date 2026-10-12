@@ -20,7 +20,7 @@ float sunspot_max(const data records[], size_t count)
 {
     if (records == NULL || count == 0) {
         return NAN;
-2    }
+    }
 
     double maximum = records[0].value;
     for (size_t i = 1; i < count; ++i) {

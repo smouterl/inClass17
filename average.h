@@ -1,0 +1,1 @@
+float average(const data *array, int size);

@@ -1,24 +1,26 @@
 #include "data.h"
 #include "sunspot_parser.h"
 #include "minmax.h"
-#include <stdio.h>
+#include "average.h"
+#include <stdio.h>code
 #include <stdlib.h>
+#include <string.h>
 
 #define GROWTH_SIZE 50
 
-struct data allocate(struct data** ptr);
-struct data *reallocate(struct data** ptr);
+data *allocate(data* ptr, int curr_size);
+data *reallocate(data* ptr, int curr_size);
 int deallocate(data* ptr);
 
 
-void main(){
+int main(){
 
     FILE *fptr = fopen("sunspot.dat", "r");
 
-    int curr_size = 250;
+    int curr_size = 50;
 
-    struct data data_arr;
-    allocate(data** data_arr);
+    data *data_arr;
+    data_arr = allocate(data_arr, curr_size);
 
     if (fptr == NULL) {
         printf("Error: Could not open file.\n");
@@ -31,30 +33,33 @@ void main(){
     int index = 0;
 
     do{
-        fgets(user_input, 80, fptr);
-        token1 = strtok(user_input, "   ");
-        token2 = strtok(NULL, "   ");
-
-        double temp[2] = getData(*token1, *token2);
-        *(data_arr + index).year = temp[0];
-        *(data_arr + index).value =  temp[1];
-
+        fgets(user_input, 80, (fptr+index));
+        strcpy(token1, strtok(user_input, "   "));
+        strcpy(token2, strtok(NULL, "   "));
+        if(index < curr_size){
+            double *temp = getData(token1, token2);
+            ((data_arr + index)->year) = *temp;
+            ((data_arr + index)->value) =  *(temp+1);
+            index++;
+        } else {
+            data_arr = reallocate(data_arr, curr_size);
+        }
+        
     }while(token1 != NULL);
 
     printf("average = %f", average(data_arr, curr_size));
-    printf("min = %f", min(data_arr, curr_size));
-    printf("max = %f", max(data_arr, curr_size));
-
+    printf("min = %f", sunspot_min(data_arr, curr_size));
+    printf("max = %f", sunspot_max(data_arr, curr_size));
 
     return 0;
 }
 
-    struct data allocate(struct data** ptr){
-    ptr = malloc(curr_size*sizeof(struct data));
+    data *allocate(data* ptr, int curr_size){
+    ptr = malloc(curr_size*sizeof(data));
     return ptr;
     }
 
-    struct data *reallocate(struct data** ptr){
+    data *reallocate(data* ptr, int curr_size){
     curr_size += GROWTH_SIZE;
     ptr = realloc(ptr, curr_size*sizeof(data));
     return ptr;
