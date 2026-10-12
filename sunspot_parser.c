@@ -8,7 +8,7 @@ Description: Takes two tokens and makes a double array
 
 double *getData(char *year, char *value)
 {
-    double yearValue[2];
+    static double yearValue[2];
     char *endT1;
     char *endT2;
 

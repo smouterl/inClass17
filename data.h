@@ -1,3 +1,6 @@
+#ifndef DATA_H
+#define DATA_H
+
 typedef struct data
 {
 
@@ -5,3 +8,5 @@ typedef struct data
     double value;
 
 }data;
+
+#endif
