@@ -1,3 +1,9 @@
+/**
+File: minmax.c
+Author: Logan Smouter
+Date: 10/12/2026
+Description: Finds the minimum and maximum values in an array of data records
+ */
 #include "minmax.h"
 #include <math.h>
 
