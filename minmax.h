@@ -4,8 +4,10 @@
 #include <stddef.h>
 #include "data.h"
 
-/* Return the minimum/maximum value as a float */
-float sunspot_min(const data records[], size_t count);
-float sunspot_max(const data records[], size_t count);
+/* Return the minimum/maximum value as a float and store its year in *year.
+ * Ties use the first matching record. Invalid input returns NAN.
+ */
+float sunspot_min(const data records[], size_t count, int *year);
+float sunspot_max(const data records[], size_t count, int *year);
 
 #endif /* MINMAX_H */

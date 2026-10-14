@@ -62,9 +62,21 @@ int main(){
         
     }
 
+    if(index == 0){
+        printf("Error: No data records found.\n");
+        deallocate(data_arr);
+        fclose(fptr);
+        return 1;
+    }
+
+    int min_year;
+    int max_year;
+    float min_value = sunspot_min(data_arr, index, &min_year);
+    float max_value = sunspot_max(data_arr, index, &max_year);
+
     printf("Average = %f\n", average(data_arr, index));
-    printf("Min = %f\n", sunspot_min(data_arr, index));
-    printf("Max = %f\n", sunspot_max(data_arr, index));
+    printf("Min = %f, Year = %d\n", min_value, min_year);
+    printf("Max = %f, Year = %d\n", max_value, max_year);
 
     deallocate(data_arr);
     fclose(fptr);
